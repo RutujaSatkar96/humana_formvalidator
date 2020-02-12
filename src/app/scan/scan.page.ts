@@ -19,6 +19,8 @@ export class ScanPage implements OnInit {
   private validationResults: ValidationResultItem[];
 
   private streetAddress: string;
+  private zipCode: string = "";
+  private isZipCode : boolean = false;
 
   constructor(private cameraService: CameraService, private validatorService: ValidatorService,
     private platform: Platform, @Inject(DOCUMENT) private document: Document) {
@@ -122,21 +124,29 @@ export class ScanPage implements OnInit {
       switch (validResult.key) {
         case "Street address":
           resModel.setStreetAddress(validResult.value);
+          this.streetAddress = resModel.getStreetAddress();
           break;
 
         case "Zip code":
           resModel.setZipCode(validResult.value);
+          this.zipCode = resModel.getZipCode();
           break;
       }
     }
 
-    alert(JSON.stringify(resModel));
 
-    if(resModel.getStreetAddress.length > 0){
-      if(resModel.getZipCode.length == 0){
-        alert('enter');
-      }
+    if(this.streetAddress.length > 0 && this.zipCode == ""){
+      this.isZipCode = true;
     }
+    else{
+      this.isZipCode = false;
+    }
+    // if(resModel.getStreetAddress.length > 0){
+    //   alert('inside method');
+    //   if(resModel.getZipCode.length == 0){
+    //     alert('enter');
+    //   }
+    // }
 
     // let status = false;
     // for(let validResult of this.validationResults){
