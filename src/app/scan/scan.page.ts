@@ -120,6 +120,8 @@ export class ScanPage implements OnInit {
 
     let resModel = new ResultModel();
 
+    this.streetAddress = "";
+    this.zipCode = "";
     for (let validResult of this.validationResults) {
       switch (validResult.key) {
         case "Street address":
@@ -133,12 +135,12 @@ export class ScanPage implements OnInit {
           break;
       }
     }
-
+  
 
     if(this.streetAddress.length > 0 && this.zipCode == ""){
       this.isZipCode = true;
     }
-    else{
+    else if(this.streetAddress.length > 0 && this.zipCode.length > 0){
       this.isZipCode = false;
     }
     // if(resModel.getStreetAddress.length > 0){
