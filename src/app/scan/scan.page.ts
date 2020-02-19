@@ -20,7 +20,16 @@ export class ScanPage implements OnInit {
 
   private streetAddress: string;
   private zipCode: string = "";
+  private firstname: string = "";
+  private lastname: string = "";
+  private dob: string = "";
+
+
   private isZipCode : boolean = false;
+  private isFirstName : boolean = false;
+  private isLastName : boolean = false;
+  private isDob : boolean = false;
+
 
   constructor(private cameraService: CameraService, private validatorService: ValidatorService,
     private platform: Platform, @Inject(DOCUMENT) private document: Document) {
@@ -122,6 +131,9 @@ export class ScanPage implements OnInit {
 
     this.streetAddress = "";
     this.zipCode = "";
+    this.firstname = "";
+    this.lastname = "";
+    this.dob = "";
     for (let validResult of this.validationResults) {
       switch (validResult.key) {
         case "Street address":
@@ -133,6 +145,21 @@ export class ScanPage implements OnInit {
           resModel.setZipCode(validResult.value);
           this.zipCode = resModel.getZipCode();
           break;
+        
+        case "Last name":
+          resModel.setLastName(validResult.value);
+          this.lastname = resModel.getLastName();
+          break;
+
+        case "First name":
+          resModel.setFirstName(validResult.value);
+          this.firstname = resModel.getFirstName();
+          break;
+
+        case "Date of birth (MM/DD/YYYY)":
+          resModel.setDateOfBirth(validResult.value);
+          this.dob = resModel.getDateOfBirth();
+          break;
       }
     }
   
@@ -143,6 +170,10 @@ export class ScanPage implements OnInit {
     else if(this.streetAddress.length > 0 && this.zipCode.length > 0){
       this.isZipCode = false;
     }
+
+    this.validateFirstName();
+    this.validateLastName();
+    this.validateDob();
     // if(resModel.getStreetAddress.length > 0){
     //   alert('inside method');
     //   if(resModel.getZipCode.length == 0){
@@ -173,5 +204,33 @@ export class ScanPage implements OnInit {
     // }
     //alert('in method - '+JSON.stringify(this.validationResults));
 
+  }
+
+
+  validateFirstName(){
+    if(this.firstname == ""){
+      this.isFirstName = true;
+    }  
+    else{
+      this.isFirstName = false;
+    }
+  }
+
+  validateLastName(){
+    if(this.lastname == ""){
+        this.isLastName = true;
+    }
+    else{
+      this.isLastName = false;
+    }
+  }
+
+  validateDob(){
+    if(this.dob == ""){
+      this.isDob = true;
+    }
+    else{
+      this.isDob = false;
+    }
   }
 }

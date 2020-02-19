@@ -90,7 +90,9 @@
             <ion-card-title>Validation Results</ion-card-title>
 
             <div *ngIf ="isZipCode" style="color:red; font-size: 20px;"> As street address is entered, Zip code field is mandatory. </div>
-
+            <div *ngIf ="isFirstName" style="color:red; font-size: 20px;">First name field is mandatory.</div>
+            <div *ngIf ="isLastName" style="color:red; font-size: 20px;">Last name field is mandatory.</div>
+            <div *ngIf ="isDob" style="color:red; font-size: 20px;">DOB field is mandatory.</div>
           </ion-card-header>
         
           <ion-card-content>
