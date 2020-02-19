@@ -23,7 +23,22 @@ export class ScanPage implements OnInit {
   private firstname: string = "";
   private lastname: string = "";
   private dob: string = "";
-
+  private employerGroupName : string = "";
+  private employerGroupCity: string = "";
+  private ciy : string = "";
+  private socialSecurityNo: string = "";
+  private poBoxNumber : string = "";
+  private countryParish : string = "";
+  private state : string = "";
+  private hoursPerWeek: string = "";
+  private benifitEffDate: string = "";
+  private dateFullTimeHire : string = "";
+  private qualifyingDate: string = "";
+  private occupation: string = "";
+  private areaCode: string = "";
+  private annualSalary: string = "";
+  private emailAddress: string = "";
+  private phoneNumber : string = "";
 
   private isZipCode : boolean = false;
   private isFirstName : boolean = false;
@@ -159,6 +174,86 @@ export class ScanPage implements OnInit {
         case "Date of birth (MM/DD/YYYY)":
           resModel.setDateOfBirth(validResult.value);
           this.dob = resModel.getDateOfBirth();
+          break;
+
+        case "Employer / Group name":
+          resModel.setEmployerGroupName(validResult.value);
+          this.employerGroupName = resModel.getEmployerGroupName();
+          break;
+
+        case "Employer / Group city":
+          resModel.setEmployerGroupCity(validResult.value);
+          this.employerGroupCity = resModel.getEmployerGroupCity();
+          break;
+
+        case "Ciy":
+          resModel.setCiy(validResult.value);
+          this.ciy = resModel.getCiy();
+          break;
+
+        case "Social Security Number":
+          resModel.setSocialSecurityNo(validResult.value);
+          this.socialSecurityNo = resModel.getSocialSecurityNo();
+          break;
+
+        case "Apt Suite / PO box number":
+          resModel.setPoBoxNumber(validResult.value);
+          this.poBoxNumber = resModel.getPoBoxNumber();
+          break;
+
+        case "County Parish":
+          resModel.setCountry(validResult.value);
+          this.countryParish = resModel.getCountry();
+          break;
+
+        case "State":
+          resModel.setState(validResult.value);
+          this.state = resModel.getState();
+          break;
+
+        case "Hours worked per week":
+          resModel.setHoursPerWeek(validResult.value);
+          this.hoursPerWeek =  resModel.getHoursPerWeek();
+          break;
+
+        case "Benefit effective date (MM/DD/YYYY)":
+          resModel.setBenifitDate(validResult.value);
+          this.benifitEffDate = resModel.getBenifitDate();
+          break;
+
+        case "Date of full-time hire (MM/DD/YYYY)":
+          resModel.setDateOfFullTimeHire(validResult.value);
+          this.dateFullTimeHire = resModel.getDateOfFullTimeHire();
+          break;
+
+        case "Qualifying event date (MM/DD/YYYY)":
+          resModel.setQualifyingDate(validResult.value);
+          this.qualifyingDate = resModel.getQualifyingDate();
+          break;
+
+        case "Occupation":
+          resModel.setOccupation(validResult.value);
+          this.occupation = resModel.getOccupation();
+          break;
+
+        case "Area code":
+          resModel.setAreaCode(validResult.value);
+          this.areaCode = resModel.getAreaCode();
+          break;
+        
+        case "Annua salary":
+          resModel.setAnnualSalary(validResult.value);
+          this.annualSalary = resModel.getAnnualSalary();
+          break;
+
+        case "E-mail address":
+          resModel.setEmailAddress(validResult.value);
+          this.emailAddress = resModel.getEmailAddress();
+          break;
+
+        case "Phone number":
+          resModel.setPhoneNumber(validResult.value);
+          this.phoneNumber = resModel.getPhoneNumber();
           break;
       }
     }

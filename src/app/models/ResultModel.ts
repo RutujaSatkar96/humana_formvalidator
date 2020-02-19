@@ -7,6 +7,7 @@ export class ResultModel{
     private employerGroupName : string;
     private firstName: string;
     private country: string;
+    private state: string;
     private poBoxNumber: string;
     private dateOfFullTimeHire: string;
     private zipCode: string;
@@ -19,9 +20,14 @@ export class ResultModel{
     private qualifyingDate: string;
     private annualSalary: string;
     private male: string;
+    private phoneNumber: string;
 
     setEmployerGroupCity(employerGroupCity: string){
         this.employerGroupCity = employerGroupCity;
+    }
+
+    setPhoneNumber(phoneNumber: string){
+        this.phoneNumber = phoneNumber;
     }
 
     setCiy(ciy: string){
@@ -49,6 +55,10 @@ export class ResultModel{
 
     setPoBoxNumber(poBoxNumber: string){
         this.poBoxNumber = poBoxNumber;
+    }
+
+    setState(state: string){
+        this.state = state;
     }
 
     setDateOfFullTimeHire(dateOfFullTimeHire: string){
@@ -137,6 +147,13 @@ export class ResultModel{
     }
     getZipCode(){
         return this.zipCode;
+    }
+
+    getPhoneNumber(){
+        return this.phoneNumber;
+    }
+    getState(){
+        return this.state;
     }
 
     getHoursPerWeek(){
