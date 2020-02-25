@@ -7,6 +7,8 @@ import { SmartScanForm } from '../models/SmartScanForm';
 import { Platform } from '@ionic/angular';
 import { ValidationResultItem } from '../models/ValidationResults';
 import { ResultModel } from '../models/ResultModel';
+import { Observable } from 'rxjs';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-scan',
@@ -44,6 +46,9 @@ export class ScanPage implements OnInit {
   private isFirstName : boolean = false;
   private isLastName : boolean = false;
   private isDob : boolean = false;
+
+  private myImage = null;
+  private croppedImage = null;
 
 
   constructor(private cameraService: CameraService, private validatorService: ValidatorService,
@@ -90,6 +95,7 @@ export class ScanPage implements OnInit {
           imageData: 'data:image/jpeg;base64,' + imageData,
           index: this.scannedImages.length
         };
+        this.myImage = 'data:image/jpeg;base64,' + imageData;
 
         this.scannedImages.push(scannedImg);
       }, (err) => {
@@ -99,6 +105,12 @@ export class ScanPage implements OnInit {
       this.scannedImages.push(si);
     }
   }
+
+  imageCropped(event : ImageCroppedEvent){
+      this.croppedImage = event.base64;
+  
+  }
+
 
   submit() {
     console.log('Submitting...');
@@ -327,5 +339,22 @@ export class ScanPage implements OnInit {
     else{
       this.isDob = false;
     }
+  }
+
+  convertFileToDataUrl(url : string){
+    return Observable.create( obsever => {
+      let xhr: XMLHttpRequest = new XMLHttpRequest();
+      xhr.onload = function(){
+        let reader : FileReader = new FileReader();
+        reader.onloadend = function(){
+          obsever.next(reader.result);
+          obsever.complete();
+        };
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    });
   }
 }

@@ -43,6 +43,8 @@
         Scan
       </ion-button>
 
+      
+
       <ion-button [color]="primary" shapre="round" (click)="selectFile()" [disabled]="submitting">
         <ion-icon name="document" class="scan-button-icon"></ion-icon>
 
@@ -59,6 +61,20 @@
     </div>
 
     <div class="scanned-images">
+
+      <image-cropper
+       [imageBase64] = "myImage"
+       [maintainAspectRatio]= "true"
+       [aspectRatio]="4 / 3"
+       format = "png"
+       (imageCropped)="imageCropped($event)"
+       outputType= "base64" >
+    </image-cropper>
+
+    <div *ngIf = "croppedImage">
+        <img [src] = "croppedImage">
+
+    </div>
       <div class="scanned-image" *ngFor="let image of scannedImages; let i = index">
         <img [(src)]="image.imageData">
 
