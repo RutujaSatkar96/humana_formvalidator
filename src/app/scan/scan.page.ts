@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { CameraService } from '../services/camera/camera.service';
 import { ScannedImage } from '../models/ScannedImage';
@@ -8,7 +8,7 @@ import { Platform } from '@ionic/angular';
 import { ValidationResultItem } from '../models/ValidationResults';
 import { ResultModel } from '../models/ResultModel';
 import { Observable } from 'rxjs';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-scan',
@@ -49,6 +49,7 @@ export class ScanPage implements OnInit {
 
   private myImage = null;
   private croppedImage = null;
+  @ViewChild(ImageCropperComponent, {static: false}) angularCropper: ImageCropperComponent;
 
 
   constructor(private cameraService: CameraService, private validatorService: ValidatorService,

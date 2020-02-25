@@ -65,7 +65,7 @@
       <image-cropper
        [imageBase64] = "myImage"
        [maintainAspectRatio]= "true"
-       [aspectRatio]="4 / 3"
+       [aspectRatio]="10 / 12"
        format = "png"
        (imageCropped)="imageCropped($event)"
        outputType= "base64" >
@@ -76,7 +76,7 @@
 
     </div>
       <div class="scanned-image" *ngFor="let image of scannedImages; let i = index">
-        <img [(src)]="image.imageData">
+        <!-- <img [(src)]="image.imageData"> -->
 
         <div class="scanned-image-footer">
           <span class="title">
