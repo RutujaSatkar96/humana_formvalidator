@@ -16,6 +16,10 @@
         }
     }
 
+    .hideLayout{
+        display: none;
+    }
+
     .scanned-images {
         display: flex;
         flex-wrap: wrap;
@@ -68,4 +72,8 @@
             }
         }
     }
+}
+
+.hideLayout{
+    display: none;
 }

@@ -6,6 +6,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
   providedIn: 'root'
 })
 export class CameraService {
+
+  private imagPath : any;
+
   options: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -17,5 +20,13 @@ export class CameraService {
 
   getPicture() {
     return this.camera.getPicture(this.options);
+  }
+
+  setImagePath(imagePath: any){
+    this.imagPath = imagePath;
+  }
+
+  getImagePath(){
+    return this.imagPath;
   }
 }

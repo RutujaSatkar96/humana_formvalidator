@@ -9,6 +9,7 @@ import { ValidationResultItem } from '../models/ValidationResults';
 import { ResultModel } from '../models/ResultModel';
 import { Observable } from 'rxjs';
 import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-scan',
@@ -46,14 +47,16 @@ export class ScanPage implements OnInit {
   private isFirstName : boolean = false;
   private isLastName : boolean = false;
   private isDob : boolean = false;
-
-  private myImage = null;
+ 
+  private showButton: boolean = true;
+  private myImage : any;
   private croppedImage = null;
+  private isCroppedroppedImage : boolean = false;
   @ViewChild(ImageCropperComponent, {static: false}) angularCropper: ImageCropperComponent;
 
 
   constructor(private cameraService: CameraService, private validatorService: ValidatorService,
-    private platform: Platform, @Inject(DOCUMENT) private document: Document) {
+    private platform: Platform, @Inject(DOCUMENT) private document: Document, private router: Router) {
     this.scannedImages = new Array();
     this.validationResults = new Array();
   }
@@ -78,6 +81,8 @@ export class ScanPage implements OnInit {
 
       FR.readAsDataURL(target.files[0]);
     });
+    this.showButton = true;
+
   }
 
   selectFile() {
@@ -97,7 +102,8 @@ export class ScanPage implements OnInit {
           index: this.scannedImages.length
         };
         this.myImage = 'data:image/jpeg;base64,' + imageData;
-
+        //this.cameraService.setImagePath(this.myImage);
+        this.setImage('data:image/jpeg;base64,' + imageData);
         this.scannedImages.push(scannedImg);
       }, (err) => {
         throw err;
@@ -105,13 +111,41 @@ export class ScanPage implements OnInit {
     } else {
       this.scannedImages.push(si);
     }
+    // this.router.navigate(['/crop']);
+    this.hideAllLayout();
+  }
+
+  hideAllLayout(){
+    this.document.getElementById('buttonDiv').classList.add('hideLayout');
+    this.document.getElementById('cropButton').classList.remove('hideLayout');
+
   }
 
   imageCropped(event : ImageCroppedEvent){
       this.croppedImage = event.base64;
   
   }
+  cropImage(){
+    this.document.getElementById('buttonDiv').classList.remove('hideLayout');
+    this.document.getElementById('cropButton').classList.add('hideLayout');
+    this.isCroppedroppedImage = true;
+  }
+  ionViewWillEnter(){
+    this.document.getElementById('cropButton').classList.add('hideLayout');
+  }
 
+  ionViewDidEnter(){
+    this.document.getElementById('buttonDiv').classList.remove('hideLayout');
+  }
+
+  setImage(scannedImage){
+    let tempScannedImage = scannedImage;
+    this.cameraService.setImagePath(tempScannedImage);
+  }
+
+  cropImg(){
+    this.isCroppedroppedImage = true;
+  }
 
   submit() {
     console.log('Submitting...');

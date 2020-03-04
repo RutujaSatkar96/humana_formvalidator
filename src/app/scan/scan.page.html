@@ -36,6 +36,7 @@
         </div>
     </div> -->
 
+    <div id="buttonDiv">
     <div class="scan-buttons">
       <ion-button color="primary" shapre="round" (click)="takePicture()" [disabled]="submitting">
         <ion-icon name="camera" class="scan-button-icon"></ion-icon>
@@ -54,27 +55,33 @@
       </ion-button>
 
       <ion-button [color]="scannedImages.length? 'success':'dark'" [disabled]="!scannedImages.length || submitting" shapre="round" (click)="submit()">
-        <ion-icon name="send" class="scan-button-icon"></ion-icon>
+        <ion-icon name="send" ></ion-icon>
         
         Submit
       </ion-button>
     </div>
-
+  </div>
     <div class="scanned-images">
 
-      <image-cropper
-       [imageBase64] = "myImage"
-       [maintainAspectRatio]= "true"
-       [aspectRatio]="10 / 12"
-       format = "png"
-       (imageCropped)="imageCropped($event)"
-       outputType= "base64" >
-    </image-cropper>
+      <div *ngIf = "!isCroppedroppedImage">
+          <image-cropper 
+          [imageBase64] = "myImage"
+          [maintainAspectRatio]= "true"
+          [aspectRatio]="10 / 12"
+          format = "png"
+          (imageCropped)="imageCropped($event)"
+          outputType= "base64" >
+        </image-cropper>
+      </div>
 
-    <!-- <div *ngIf = "croppedImage">
+      
+
+    <!-- <button (click) = "cropImg()"> Crop </button> -->
+
+     <div *ngIf = "isCroppedroppedImage">
         <img [src] = "croppedImage">
 
-    </div> -->
+    </div> 
       <div class="scanned-image" *ngFor="let image of scannedImages; let i = index">
         <!-- <img [(src)]="image.imageData"> -->
 
@@ -96,6 +103,10 @@
       <span *ngIf="!scannedImages.length">
           No pages scanned yet
       </span>
+
+      <div id="cropButton">
+        <button (click) = "cropImage()" style="color:white; font-size: 20px; background-color: 	#00FF00; margin-left: 50px;">Crop</button>
+      </div>
     </div>
     </ion-card>
 
