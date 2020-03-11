@@ -64,17 +64,34 @@
     <div class="scanned-images">
 
       <div *ngIf = "!isCroppedroppedImage">
-          <image-cropper 
+        <!-- <input type="file" (change)="fileChangeEvent($event)" /> -->
+
+        <image-cropper
+            [style.display]="showCropper ? null : 'none'"
+            [imageBase64] = "myImage"
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="16 / 9"
+            [cropper]="cropper"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+        <!-- <image-cropper 
           [imageBase64] = "myImage"
           [maintainAspectRatio]= "true"
-          [aspectRatio]="10 / 12"
+          [aspectRatio]="4/4"
           format = "png"
           (imageCropped)="imageCropped($event)"
-          outputType= "base64" >
-        </image-cropper>
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+           >
+        </image-cropper> -->
       </div>
 
-      
+      <!-- outputType= "base64" -->
 
     <!-- <button (click) = "cropImg()"> Crop </button> -->
 

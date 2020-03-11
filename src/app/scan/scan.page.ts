@@ -50,7 +50,22 @@ export class ScanPage implements OnInit {
  
   private showButton: boolean = true;
   private myImage : any;
-  private croppedImage = null;
+  //private croppedImage = null;
+
+  showCropper = false;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  cropper = {
+    x1: 100,
+    y1: 100,
+    x2: 200,
+    y2: 200
+  }
+
+  // Added by Nikhil
+  private isImageLoaded : boolean = false;
+  private isCropperReady : boolean = false;
+
   private isCroppedroppedImage : boolean = false;
   @ViewChild(ImageCropperComponent, {static: false}) angularCropper: ImageCropperComponent;
 
@@ -125,6 +140,20 @@ export class ScanPage implements OnInit {
       this.croppedImage = event.base64;
   
   }
+
+// imageLoaded() {
+//     // show cropper
+//     this.isImageLoaded = true;
+
+// }
+cropperReady() {
+    // cropper ready
+    this.isCropperReady = true;
+}
+loadImageFailed() {
+    // show message
+}
+
   cropImage(){
     this.document.getElementById('buttonDiv').classList.remove('hideLayout');
     this.document.getElementById('cropButton').classList.add('hideLayout');
@@ -146,6 +175,28 @@ export class ScanPage implements OnInit {
   cropImg(){
     this.isCroppedroppedImage = true;
   }
+
+  //new code
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+}
+
+// imageCropped(image: string) {
+//     this.croppedImage = image;
+// }
+
+imageLoaded() {
+  this.showCropper = true;
+  setTimeout(() => {
+    this.cropper = {
+      x1: 100,
+      y1: 100,
+      x2: 200,
+      y2: 200
+    }
+  });
+}
 
   submit() {
     console.log('Submitting...');
