@@ -96,10 +96,12 @@
 
      <div *ngIf = "isCroppedroppedImage">
         <img [src] = "croppedImage">
-
     </div> 
-      <div class="scanned-image" *ngFor="let image of scannedImages; let i = index">
-        <!-- <img [(src)]="image.imageData"> -->
+
+    <div *ngIf = "isImageFile">
+        <div class="scanned-image" *ngFor="let image of scannedImages; let i = index" >
+            <img [(src)]="image.imageData"> 
+    </div>
 
         <div class="scanned-image-footer">
           <span class="title">
