@@ -224,6 +224,7 @@ imageLoaded() {
 
       this.validationResults.push(...data);
       // alert('result - '+JSON.stringify(this.validationResults));
+
       this.validateAddress();
     })
       .catch(error => {
@@ -252,108 +253,115 @@ imageLoaded() {
     this.dob = "";
     for (let validResult of this.validationResults) {
       switch (validResult.key) {
-        case "Street address":
-          resModel.setStreetAddress(validResult.value);
+        case "Street_address":
+          resModel.setStreetAddress(validResult.value[1]);
           this.streetAddress = resModel.getStreetAddress();
           break;
 
-        case "Zip code":
-          resModel.setZipCode(validResult.value);
-          this.zipCode = resModel.getZipCode();
+        case "Zipcode":
+          //alert('zip' + validResult.value)
+          resModel.setZipCode(validResult.value[1]);
+          //this.zipCode = resModel.getZipCode();
           break;
         
-        case "Last name":
-          resModel.setLastName(validResult.value);
+        case "Last_name":
+          resModel.setLastName(validResult.value[1]);
           this.lastname = resModel.getLastName();
+          //alert('l'+ this.lastname)
           break;
 
-        case "First name":
-          resModel.setFirstName(validResult.value);
+        case "First_name":
+          //alert('fname' + validResult.value[1])
+          resModel.setFirstName(validResult.value[1]);
           this.firstname = resModel.getFirstName();
+         // alert('frrrrr' + this.firstname)
+
           break;
 
-        case "Date of birth (MM/DD/YYYY)":
-          resModel.setDateOfBirth(validResult.value);
+        case "Date_of_birth":
+          resModel.setDateOfBirth(validResult.value[1]);
           this.dob = resModel.getDateOfBirth();
           break;
 
         case "Employer / Group name":
-          resModel.setEmployerGroupName(validResult.value);
+          resModel.setEmployerGroupName(validResult.value[1]);
           this.employerGroupName = resModel.getEmployerGroupName();
           break;
 
         case "Employer / Group city":
-          resModel.setEmployerGroupCity(validResult.value);
+          resModel.setEmployerGroupCity(validResult.value[1]);
           this.employerGroupCity = resModel.getEmployerGroupCity();
           break;
 
-        case "Ciy":
-          resModel.setCiy(validResult.value);
+        case "City":
+          //alert('city'+ validResult.value)
+          resModel.setCiy(validResult.value[1]);
           this.ciy = resModel.getCiy();
+          //alert('cc'+ this.ciy)
           break;
 
-        case "Social Security Number":
-          resModel.setSocialSecurityNo(validResult.value);
+        case "SSN":
+          resModel.setSocialSecurityNo(validResult.value[1]);
           this.socialSecurityNo = resModel.getSocialSecurityNo();
           break;
 
-        case "Apt Suite / PO box number":
-          resModel.setPoBoxNumber(validResult.value);
+        case "PO_box_number":
+          resModel.setPoBoxNumber(validResult.value[1]);
           this.poBoxNumber = resModel.getPoBoxNumber();
           break;
 
-        case "County Parish":
-          resModel.setCountry(validResult.value);
+        case "Country":
+          resModel.setCountry(validResult.value[1]);
           this.countryParish = resModel.getCountry();
           break;
 
         case "State":
-          resModel.setState(validResult.value);
+          resModel.setState(validResult.value[1]);
           this.state = resModel.getState();
           break;
 
-        case "Hours worked per week":
-          resModel.setHoursPerWeek(validResult.value);
+        case "Hours_worked":
+          resModel.setHoursPerWeek(validResult.value[1]);
           this.hoursPerWeek =  resModel.getHoursPerWeek();
           break;
 
         case "Benefit effective date (MM/DD/YYYY)":
-          resModel.setBenifitDate(validResult.value);
+          resModel.setBenifitDate(validResult.value[1]);
           this.benifitEffDate = resModel.getBenifitDate();
           break;
 
-        case "Date of full-time hire (MM/DD/YYYY)":
-          resModel.setDateOfFullTimeHire(validResult.value);
+        case "Date_of_hiring":
+          resModel.setDateOfFullTimeHire(validResult.value[1]);
           this.dateFullTimeHire = resModel.getDateOfFullTimeHire();
           break;
 
         case "Qualifying event date (MM/DD/YYYY)":
-          resModel.setQualifyingDate(validResult.value);
+          resModel.setQualifyingDate(validResult.value[1]);
           this.qualifyingDate = resModel.getQualifyingDate();
           break;
 
         case "Occupation":
-          resModel.setOccupation(validResult.value);
+          resModel.setOccupation(validResult.value[1]);
           this.occupation = resModel.getOccupation();
           break;
 
-        case "Area code":
-          resModel.setAreaCode(validResult.value);
+        case "Area_code":
+          resModel.setAreaCode(validResult.value[1]);
           this.areaCode = resModel.getAreaCode();
           break;
         
-        case "Annua salary":
-          resModel.setAnnualSalary(validResult.value);
+        case "Salary":
+          resModel.setAnnualSalary(validResult.value[1]);
           this.annualSalary = resModel.getAnnualSalary();
           break;
 
-        case "E-mail address":
-          resModel.setEmailAddress(validResult.value);
+        case "Email_address":
+          resModel.setEmailAddress(validResult.value[1]);
           this.emailAddress = resModel.getEmailAddress();
           break;
 
-        case "Phone number":
-          resModel.setPhoneNumber(validResult.value);
+        case "Phone_number":
+          resModel.setPhoneNumber(validResult.value[1]);
           this.phoneNumber = resModel.getPhoneNumber();
           break;
       }
