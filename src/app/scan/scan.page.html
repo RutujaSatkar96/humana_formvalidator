@@ -95,8 +95,13 @@
     <!-- <button (click) = "cropImg()"> Crop </button> -->
 
      <div *ngIf = "isCroppedroppedImage">
-        <img [src] = "croppedImage">
+        <img [src] = "croppedImage" style="filter:contrast(150%) brightness(120%);">
     </div> 
+   <!-- <div style="max-width: 10px; max-width: 10px;">
+        <web-photo-filter *ngIf = "isCroppedroppedImage" [src]="croppedImage" style="max-width: 10px; max-width: 10px;"
+        [filter]="selectedFilter" [level]="level" keep="false" (filterLoad)="imageLoaded($event)">
+          </web-photo-filter>
+   </div> -->
 
     <div *ngIf = "isImageFile">
         <div class="scanned-image" *ngFor="let image of scannedImages; let i = index" >
@@ -125,6 +130,9 @@
       <div id="cropButton">
         <button (click) = "cropImage()" style="color:white; font-size: 20px; background-color: 	#00FF00; margin-left: 50px;">Crop</button>
       </div>
+      <!-- <div>
+        <button (click) = "filter('bgr')" style="color:white; font-size: 20px; background-color: 	#00FF00; margin-left: 50px;"> Filter </button>
+      </div> -->
     </div>
     </ion-card>
 

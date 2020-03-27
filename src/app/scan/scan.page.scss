@@ -37,6 +37,16 @@
                 width: 40vw;
             }
 
+            web-photo-filter{
+                max-width: 10px;
+                max-height: 10px;
+            }
+            .no-original img.display-no-filter {
+                display: none !important;
+                }
+              .only-original canvas {
+                display: none !important;
+              }
             .scanned-image-footer {
                 display: flex;
                 width: 100%;

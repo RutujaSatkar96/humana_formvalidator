@@ -52,6 +52,11 @@ export class ScanPage implements OnInit {
   private myImage : any;
   //private croppedImage = null;
 
+  private selectedFilter = null;
+  private level = 1;
+  private result : HTMLElement;
+
+
   showCropper = false;
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -122,6 +127,7 @@ export class ScanPage implements OnInit {
         this.myImage = 'data:image/jpeg;base64,' + imageData;
         //this.cameraService.setImagePath(this.myImage);
         this.setImage('data:image/jpeg;base64,' + imageData);
+        //this.filter(null, 1);
         this.scannedImages.push(scannedImg);
       }, (err) => {
         throw err;
@@ -161,6 +167,7 @@ loadImageFailed() {
     this.document.getElementById('buttonDiv').classList.remove('hideLayout');
     this.document.getElementById('cropButton').classList.add('hideLayout');
     this.isCroppedroppedImage = true;
+    //this.filter('brightness', 1.7);
   }
   ionViewWillEnter(){
     this.document.getElementById('cropButton').classList.add('hideLayout');
@@ -189,7 +196,7 @@ loadImageFailed() {
 //     this.croppedImage = image;
 // }
 
-imageLoaded() {
+imageLoaded(e) {
   this.showCropper = true;
   setTimeout(() => {
     this.cropper = {
@@ -199,7 +206,17 @@ imageLoaded() {
       y2: 200
     }
   });
+  this.result = e.detail.result;
 }
+
+filter(selected, level?){
+ // alert('filter');
+  this.selectedFilter = selected;
+  this.level = level ? level : 1;
+  //alert('filter' + this.selectedFilter);
+  //alert('level' + this.level);
+}
+
 
   submit() {
     console.log('Submitting...');
@@ -261,7 +278,7 @@ imageLoaded() {
         case "Zipcode":
           //alert('zip' + validResult.value)
           resModel.setZipCode(validResult.value[1]);
-          //this.zipCode = resModel.getZipCode();
+          this.zipCode = resModel.getZipCode();
           break;
         
         case "Last_name":
