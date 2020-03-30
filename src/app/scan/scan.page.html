@@ -95,7 +95,7 @@
     <!-- <button (click) = "cropImg()"> Crop </button> -->
 
      <div *ngIf = "isCroppedroppedImage">
-        <img [src] = "croppedImage" style="filter:contrast(150%) brightness(120%);">
+        <img [src] = "croppedImage" style="filter:contrast(150%) brightness(120%) grayscale(100%);">
     </div> 
    <!-- <div style="max-width: 10px; max-width: 10px;">
         <web-photo-filter *ngIf = "isCroppedroppedImage" [src]="croppedImage" style="max-width: 10px; max-width: 10px;"
