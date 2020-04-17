@@ -16,6 +16,8 @@ import { ValidatorService } from './services/validator/validator.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { SettingsPage } from './settings/settings.page';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { FormsModule } from '@angular/forms';
       HomePage
     ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
     Camera,
     CameraService,

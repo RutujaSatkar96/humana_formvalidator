@@ -4,12 +4,16 @@ import { SmartScanForm } from '../../models/SmartScanForm'
 import { Platform } from '@ionic/angular';
 import { ValidationResultItem } from 'src/app/models/ValidationResults';
 import { ToastController } from '@ionic/angular';
+import { getLocaleDateFormat } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidatorService {
-  constructor(private http: HTTP, private platform: Platform, private toastController: ToastController) { }
+  constructor(private http: HTTP, private platform: Platform, private toastController: ToastController, private httpService: HttpClient) { }
+
+  private _url: string = "assets/humana.json";
 
   validateForm(smartScanForm: SmartScanForm) {
     const proxyUrl = "https://cors-anywhere.herokuapp.com/"
@@ -47,6 +51,7 @@ export class ValidatorService {
         });
       });
 
+      
       //Mock Data
       // setTimeout(() => {
       //   console.log('Mock Data');
@@ -64,6 +69,10 @@ export class ValidatorService {
     }
   }
 
+  getData(){
+    return this.httpService.get(this._url);
+  }
+
   private B64toBlob(dataURI) {
     var byteString = atob(dataURI.split(',')[1]);
     var ab = new ArrayBuffer(byteString.length);
@@ -76,7 +85,7 @@ export class ValidatorService {
     return new Blob([ab], { type: 'image/jpeg' });
   }
 
-  private extractValidationResult(data) {
+   extractValidationResult(data) {
     let validationResults: ValidationResultItem[] = new Array();
     const response = data.response[0].file_response;
     const keys = Object.keys(response);

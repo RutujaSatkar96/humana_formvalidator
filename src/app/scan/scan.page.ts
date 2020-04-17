@@ -72,6 +72,8 @@ export class ScanPage implements OnInit {
   private isCropperReady : boolean = false;
   private isImageFile : boolean = false;
 
+  private strData: string;
+
   private isCroppedroppedImage : boolean = false;
   @ViewChild(ImageCropperComponent, {static: false}) angularCropper: ImageCropperComponent;
 
@@ -83,6 +85,11 @@ export class ScanPage implements OnInit {
   }
 
   ngOnInit() {
+    this.validatorService.getData()
+    .subscribe(value => {
+      this.setData(value);
+    });
+
     this.document.getElementById("file-native").addEventListener("change", ($event) => {
       const target = $event.target as HTMLInputElement;
       const scannedImages = this.scannedImages;
@@ -103,6 +110,19 @@ export class ScanPage implements OnInit {
       FR.readAsDataURL(target.files[0]);
     });
     this.showButton = true;
+
+  }
+
+  setData(value : any){
+      this.validationResults = this.validatorService.extractValidationResult(value.data);
+      //this.validationResults = data;
+      //this.strData = JSON.stringify(this.validationResults); 
+      
+  }
+  showData(){
+    alert('data=='+ JSON.stringify(this.validationResults));
+    //this.strData.substr(7,20);
+    //alert('data str new=='+ JSON.stringify(this.strData));
 
   }
 
@@ -129,14 +149,17 @@ export class ScanPage implements OnInit {
         this.setImage('data:image/jpeg;base64,' + imageData);
         //this.filter(null, 1);
         this.scannedImages.push(scannedImg);
+        
       }, (err) => {
         throw err;
       });
     } else {
       this.scannedImages.push(si);
+      
     }
     // this.router.navigate(['/crop']);
     this.hideAllLayout();
+    
   }
 
   hideAllLayout(){
@@ -219,37 +242,40 @@ filter(selected, level?){
 
 
   submit() {
-    console.log('Submitting...');
-    let input: SmartScanForm = {
-      FirstName: 'FirstName',
-      LastName: 'LastName',
-      SSN: 'SSN',
-      FormPages: [
-        {
-          imageData: this.scannedImages[0].imageData,
-          index: 0
-        }
-      ]
-    };
+    // console.log('Submitting...');
+    // let input: SmartScanForm = {
+    //   FirstName: 'FirstName',
+    //   LastName: 'LastName',
+    //   SSN: 'SSN',
+    //   FormPages: [
+    //     {
+    //       imageData: this.scannedImages[0].imageData,
+    //       index: 0
+    //     }
+    //   ]
+    // };
+    
+    // //alert('images '+ this.scannedImages.length);
+    // this.validationResults.splice(0);
 
-    this.validationResults.splice(0);
+    // this.submitting = true;
 
-    this.submitting = true;
+    // this.validatorService.validateForm(input).then((data: ValidationResultItem[]) => {
+    //   console.log(data);
 
-    this.validatorService.validateForm(input).then((data: ValidationResultItem[]) => {
-      console.log(data);
+    //   this.validationResults.push(...data);
+    //   //alert('result - '+JSON.stringify(this.validationResults));
 
-      this.validationResults.push(...data);
-      // alert('result - '+JSON.stringify(this.validationResults));
+    //   this.validateAddress();
+    // })
+    //   .catch(error => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     this.submitting = false;
+    //   });
 
-      this.validateAddress();
-    })
-      .catch(error => {
-        console.log(error);
-      })
-      .finally(() => {
-        this.submitting = false;
-      });
+    this.validateAddress();
   }
 
   removeImage(image: ScannedImage) {
@@ -270,7 +296,7 @@ filter(selected, level?){
     this.dob = "";
     for (let validResult of this.validationResults) {
       switch (validResult.key) {
-        case "Street_address":
+        case "Street Address":
           resModel.setStreetAddress(validResult.value[1]);
           this.streetAddress = resModel.getStreetAddress();
           break;
@@ -281,13 +307,13 @@ filter(selected, level?){
           this.zipCode = resModel.getZipCode();
           break;
         
-        case "Last_name":
+        case "lastname":
           resModel.setLastName(validResult.value[1]);
           this.lastname = resModel.getLastName();
           //alert('l'+ this.lastname)
           break;
 
-        case "First_name":
+        case "Firstname":
           //alert('fname' + validResult.value[1])
           resModel.setFirstName(validResult.value[1]);
           this.firstname = resModel.getFirstName();
@@ -295,7 +321,7 @@ filter(selected, level?){
 
           break;
 
-        case "Date_of_birth":
+        case "DOB":
           resModel.setDateOfBirth(validResult.value[1]);
           this.dob = resModel.getDateOfBirth();
           break;
@@ -317,12 +343,12 @@ filter(selected, level?){
           //alert('cc'+ this.ciy)
           break;
 
-        case "SSN":
+        case "Socialsecuritynumber":
           resModel.setSocialSecurityNo(validResult.value[1]);
           this.socialSecurityNo = resModel.getSocialSecurityNo();
           break;
 
-        case "PO_box_number":
+        case "po box":
           resModel.setPoBoxNumber(validResult.value[1]);
           this.poBoxNumber = resModel.getPoBoxNumber();
           break;
@@ -347,7 +373,7 @@ filter(selected, level?){
           this.benifitEffDate = resModel.getBenifitDate();
           break;
 
-        case "Date_of_hiring":
+        case "Dote of full-time hire (MM_DD_YYYY)":
           resModel.setDateOfFullTimeHire(validResult.value[1]);
           this.dateFullTimeHire = resModel.getDateOfFullTimeHire();
           break;
@@ -362,22 +388,22 @@ filter(selected, level?){
           this.occupation = resModel.getOccupation();
           break;
 
-        case "Area_code":
+        case "Area code":
           resModel.setAreaCode(validResult.value[1]);
           this.areaCode = resModel.getAreaCode();
           break;
         
-        case "Salary":
+        case "Annual salary $":
           resModel.setAnnualSalary(validResult.value[1]);
           this.annualSalary = resModel.getAnnualSalary();
           break;
 
-        case "Email_address":
+        case "E-mail address":
           resModel.setEmailAddress(validResult.value[1]);
           this.emailAddress = resModel.getEmailAddress();
           break;
 
-        case "Phone_number":
+        case "phonenumber":
           resModel.setPhoneNumber(validResult.value[1]);
           this.phoneNumber = resModel.getPhoneNumber();
           break;
