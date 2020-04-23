@@ -17,7 +17,7 @@ export class ValidatorService {
 
   validateForm(smartScanForm: SmartScanForm) {
     const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-    const url = 'http://13.75.106.59:5003/ai/humanaextract1';
+    const url = 'http://34.69.207.125:8000/uploads/form/';
     let formData:FormData = new FormData();
 
     formData.append('file', this.B64toBlob(smartScanForm.FormPages[0].imageData), 'file.name' + Math.random() + '.jpg');

@@ -150,7 +150,7 @@
         
           <ion-card-content>
             <ul class="list">
-              <ion-icon name="checkmark-circle" color="success" *ngIf="employerGroupName.toLowerCase() !== 'o'"></ion-icon>
+               <ion-icon name="checkmark-circle" color="success" *ngIf="employerGroupName.toLowerCase() !== 'o'"></ion-icon>
               <ion-icon name="close-circle" color="danger" *ngIf="employerGroupName.toLowerCase() === 'o'"></ion-icon>
               <label>Employer/ Group Name: {{employerGroupName}}</label><br>
 
@@ -184,23 +184,23 @@
 
               <ion-icon name="checkmark-circle" color="success" *ngIf="dob.toLowerCase() !== 'o'"></ion-icon>
               <ion-icon name="close-circle" color="danger" *ngIf="dob.toLowerCase() === 'o'"></ion-icon>
-              <label>Date of Birth: {{dob}}</label><br>
+              <label>Date of Birth: {{dob}}</label><br> 
 
               <ion-icon name="checkmark-circle" color="success"></ion-icon>
-              <!-- <ion-icon name="close-circle" color="danger" *ngIf="areaCode.toLowerCase() === 'o'"></ion-icon> -->
+              <!-- <ion-icon name="close-circle" color="danger"></ion-icon> -->
               <label>Area Code: {{areaCode}}</label><br>
 
               <ion-icon name="checkmark-circle" color="success" *ngIf="phoneNumber.toLowerCase() !== 'o'"></ion-icon>
               <ion-icon name="close-circle" color="danger" *ngIf="phoneNumber.toLowerCase() === 'o'"></ion-icon> 
-              <label>Phone Number: {{phoneNumber}}</label><br> 
+              <label>Phone Number: {{phoneNumber}}</label><br>
 
 
               <ion-icon name="checkmark-circle" color="success" *ngIf="streetAddress.toLowerCase() !== 'o'"></ion-icon>
               <ion-icon name="close-circle" color="danger" *ngIf="streetAddress.toLowerCase() === 'o'"></ion-icon>
               <label>Street Address: {{streetAddress}}</label><br> 
 
-              <ion-icon name="checkmark-circle" color="success" *ngIf="poBoxNumber.toLowerCase() !== 'o'"></ion-icon>
-              <ion-icon name="close-circle" color="danger" *ngIf="poBoxNumber.toLowerCase() === 'o'"></ion-icon>
+              <ion-icon name="checkmark-circle" color="success"></ion-icon>
+              <!-- <ion-icon name="close-circle" color="danger" *ngIf="poBoxNumber.toLowerCase() === 'o'"></ion-icon> -->
               <label>Apt PO Box Number: {{poBoxNumber}}</label><br>
 
               <ion-icon name="checkmark-circle" color="success" *ngIf="ciy.toLowerCase() !== 'o'"></ion-icon>
@@ -208,10 +208,10 @@
               <label>City : {{ciy}}</label><br> 
 
               <ion-icon name="checkmark-circle" color="success" ></ion-icon>
-              <!-- <ion-icon name="close-circle" color="danger" *ngIf="zipCode.toLowerCase() === 'o'"></ion-icon>  -->
+              <ion-icon name="close-circle" color="danger" *ngIf="zipCode.toLowerCase() === 'o'"></ion-icon> 
               <label>Zip Code : {{zipCode}}</label><br>
 
-             <ion-icon name="checkmark-circle" color="success" *ngIf="countryParish.toLowerCase() !== 'o'"></ion-icon>
+              <ion-icon name="checkmark-circle" color="success" *ngIf="countryParish.toLowerCase() !== 'o'"></ion-icon>
               <ion-icon name="close-circle" color="danger" *ngIf="countryParish.toLowerCase() === 'o'"></ion-icon> 
               <label>Country / Parish : {{countryParish}}</label><br> 
 
@@ -223,17 +223,25 @@
               <ion-icon name="close-circle" color="danger" *ngIf="dateFullTimeHire.toLowerCase() === 'o'"></ion-icon> 
               <label>Date of Full Time Hire : {{dateFullTimeHire}}</label><br>
               
-             <ion-icon name="checkmark-circle" color="success"></ion-icon>
-             <!-- <ion-icon name="close-circle" color="danger" *ngIf="dateFullTimeHire.toLowerCase() ==='o'"></ion-icon> -->
+              <ion-icon name="checkmark-circle" color="success"></ion-icon>
+              <ion-icon name="close-circle" color="danger" *ngIf="dateFullTimeHire.toLowerCase() ==='o'"></ion-icon>
               <label>Annual Salary : {{annualSalary}}</label><br>
 
-              <ion-icon name="checkmark-circle" color="success" *ngIf="hoursPerWeek.toLowerCase() !== 'o'"></ion-icon>
-              <ion-icon name="close-circle" color="danger" *ngIf="hoursPerWeek.toLowerCase() === 'o'"></ion-icon>
+              <ion-icon name="checkmark-circle" color="success"></ion-icon>
+              <!-- <ion-icon name="close-circle" color="danger" *ngIf="hoursPerWeek.toLowerCase() === 'o'"></ion-icon> -->
               <label>Hours Worked per Week : {{hoursPerWeek}}</label><br>
 
               <ion-icon name="checkmark-circle" color="success" *ngIf="occupation.toLowerCase() !== 'o'"></ion-icon>
               <ion-icon name="close-circle" color="danger" *ngIf="occupation.toLowerCase() === 'o'"></ion-icon>
-              <label>Occupation : {{occupation}}</label><br> 
+              <label>Occupation : {{occupation}}</label><br>  
+
+              <ion-icon name="checkmark-circle" color="success" *ngIf="gender.toLowerCase() !== 'o'"></ion-icon>
+              <ion-icon name="close-circle" color="danger" *ngIf="gender.toLowerCase() === 'o'"></ion-icon>
+              <label>Gender : {{gender}}</label><br> 
+
+              <ion-icon name="checkmark-circle" color="success" *ngIf="language.toLowerCase() !== 'o'"></ion-icon>
+              <ion-icon name="close-circle" color="danger" *ngIf="language.toLowerCase() === 'o'"></ion-icon>
+              <label>Language : {{language}}</label><br> 
             </ul>
           </ion-card-content>
         </ion-card>

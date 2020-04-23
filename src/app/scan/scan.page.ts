@@ -42,6 +42,8 @@ export class ScanPage implements OnInit {
   private annualSalary: string = "";
   private emailAddress: string = "";
   private phoneNumber : string = "";
+  private gender : string = "";
+  private language : string = "";
 
   private isZipCode : boolean = false;
   private isFirstName : boolean = false;
@@ -85,10 +87,10 @@ export class ScanPage implements OnInit {
   }
 
   ngOnInit() {
-    this.validatorService.getData()
-    .subscribe(value => {
-      this.setData(value);
-    });
+    // this.validatorService.getData()
+    // .subscribe(value => {
+    //   this.setData(value);
+    // });
 
     this.document.getElementById("file-native").addEventListener("change", ($event) => {
       const target = $event.target as HTMLInputElement;
@@ -242,40 +244,40 @@ filter(selected, level?){
 
 
   submit() {
-    // console.log('Submitting...');
-    // let input: SmartScanForm = {
-    //   FirstName: 'FirstName',
-    //   LastName: 'LastName',
-    //   SSN: 'SSN',
-    //   FormPages: [
-    //     {
-    //       imageData: this.scannedImages[0].imageData,
-    //       index: 0
-    //     }
-    //   ]
-    // };
+    console.log('Submitting...');
+    let input: SmartScanForm = {
+      FirstName: 'FirstName',
+      LastName: 'LastName',
+      SSN: 'SSN',
+      FormPages: [
+        {
+          imageData: this.scannedImages[0].imageData,
+          index: 0
+        }
+      ]
+    };
     
-    // //alert('images '+ this.scannedImages.length);
-    // this.validationResults.splice(0);
+    //alert('images '+ this.scannedImages.length);
+    this.validationResults.splice(0);
 
-    // this.submitting = true;
+    this.submitting = true;
 
-    // this.validatorService.validateForm(input).then((data: ValidationResultItem[]) => {
-    //   console.log(data);
+    this.validatorService.validateForm(input).then((data: ValidationResultItem[]) => {
+      console.log(data);
 
-    //   this.validationResults.push(...data);
-    //   //alert('result - '+JSON.stringify(this.validationResults));
+      this.validationResults.push(...data);
+      //alert('result - '+JSON.stringify(this.validationResults));
 
-    //   this.validateAddress();
-    // })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     this.submitting = false;
-    //   });
+      this.validateAddress();
+    })
+      .catch(error => {
+        console.log(error);
+      })
+      .finally(() => {
+        this.submitting = false;
+      });
 
-    this.validateAddress();
+    //this.validateAddress();
   }
 
   removeImage(image: ScannedImage) {
@@ -295,29 +297,30 @@ filter(selected, level?){
     this.lastname = "";
     this.dob = "";
     for (let validResult of this.validationResults) {
+      //alert(''+validResult.key)
       switch (validResult.key) {
-        case "Street Address":
+        case "Street address":
           resModel.setStreetAddress(validResult.value[1]);
           this.streetAddress = resModel.getStreetAddress();
           break;
 
-        case "Zipcode":
+        case "Zip code":
           //alert('zip' + validResult.value)
           resModel.setZipCode(validResult.value[1]);
           this.zipCode = resModel.getZipCode();
           break;
         
-        case "lastname":
+        case "Last name":
           resModel.setLastName(validResult.value[1]);
           this.lastname = resModel.getLastName();
           //alert('l'+ this.lastname)
           break;
 
-        case "Firstname":
+        case "First name":
           //alert('fname' + validResult.value[1])
           resModel.setFirstName(validResult.value[1]);
           this.firstname = resModel.getFirstName();
-         // alert('frrrrr' + this.firstname)
+          //alert('fr' + this.firstname)
 
           break;
 
@@ -326,7 +329,7 @@ filter(selected, level?){
           this.dob = resModel.getDateOfBirth();
           break;
 
-        case "Employer / Group name":
+        case "Employer _ Group name":
           resModel.setEmployerGroupName(validResult.value[1]);
           this.employerGroupName = resModel.getEmployerGroupName();
           break;
@@ -343,17 +346,17 @@ filter(selected, level?){
           //alert('cc'+ this.ciy)
           break;
 
-        case "Socialsecuritynumber":
+        case "SocialSecurity":
           resModel.setSocialSecurityNo(validResult.value[1]);
           this.socialSecurityNo = resModel.getSocialSecurityNo();
           break;
 
-        case "po box":
+        case "PO box number":
           resModel.setPoBoxNumber(validResult.value[1]);
           this.poBoxNumber = resModel.getPoBoxNumber();
           break;
 
-        case "Country":
+        case "County_Parish":
           resModel.setCountry(validResult.value[1]);
           this.countryParish = resModel.getCountry();
           break;
@@ -363,22 +366,22 @@ filter(selected, level?){
           this.state = resModel.getState();
           break;
 
-        case "Hours_worked":
+        case "Hours worked per week":
           resModel.setHoursPerWeek(validResult.value[1]);
           this.hoursPerWeek =  resModel.getHoursPerWeek();
           break;
 
-        case "Benefit effective date (MM/DD/YYYY)":
+        case "B_effective":
           resModel.setBenifitDate(validResult.value[1]);
           this.benifitEffDate = resModel.getBenifitDate();
           break;
 
-        case "Dote of full-time hire (MM_DD_YYYY)":
+        case "DOH":
           resModel.setDateOfFullTimeHire(validResult.value[1]);
           this.dateFullTimeHire = resModel.getDateOfFullTimeHire();
           break;
 
-        case "Qualifying event date (MM/DD/YYYY)":
+        case "Q_event":
           resModel.setQualifyingDate(validResult.value[1]);
           this.qualifyingDate = resModel.getQualifyingDate();
           break;
@@ -393,7 +396,7 @@ filter(selected, level?){
           this.areaCode = resModel.getAreaCode();
           break;
         
-        case "Annual salary $":
+        case "Annual salary":
           resModel.setAnnualSalary(validResult.value[1]);
           this.annualSalary = resModel.getAnnualSalary();
           break;
@@ -403,10 +406,20 @@ filter(selected, level?){
           this.emailAddress = resModel.getEmailAddress();
           break;
 
-        case "phonenumber":
+        case "Phone_number":
           resModel.setPhoneNumber(validResult.value[1]);
           this.phoneNumber = resModel.getPhoneNumber();
           break;
+
+        case "Gender Flag":
+          resModel.setGender(validResult.value[1]);
+          this.gender = resModel.getGender();
+          break;
+
+        case "Langauage":
+          resModel.setLanguage(validResult.value[1]);
+          this.language = resModel.getLanguage();
+          break;  
       }
     }
   

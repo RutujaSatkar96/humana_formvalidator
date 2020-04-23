@@ -21,9 +21,19 @@ export class ResultModel{
     private annualSalary: string;
     private male: string;
     private phoneNumber: string;
+    private gender: string;
+    private language: string;
 
     setEmployerGroupCity(employerGroupCity: string){
         this.employerGroupCity = employerGroupCity;
+    }
+
+    setGender(gender: string){
+        this.gender = gender;
+    }
+
+    setLanguage(language: string){
+        this.language = language;
     }
 
     setPhoneNumber(phoneNumber: string){
@@ -123,6 +133,11 @@ export class ResultModel{
     getLastName(){
         return this.lastName;
     }
+
+    getGender(){
+        return this.gender;
+    }
+
     getSocialSecurityNo(){
         return this.socialSecurityNo;
     }
@@ -144,6 +159,9 @@ export class ResultModel{
     }
     getDateOfFullTimeHire(){
         return this.dateOfFullTimeHire;
+    }
+    getLanguage(){
+        return this.language;
     }
     getZipCode(){
         return this.zipCode;
