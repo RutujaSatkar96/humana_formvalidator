@@ -5,7 +5,7 @@ import { Platform } from '@ionic/angular';
 import { ValidationResultItem } from 'src/app/models/ValidationResults';
 import { ToastController } from '@ionic/angular';
 import { getLocaleDateFormat } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +15,41 @@ export class ValidatorService {
 
   private _url: string = "assets/humana.json";
 
+  
+
   validateForm(smartScanForm: SmartScanForm) {
     const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-    const url = 'http://34.69.207.125:8000/uploads/form/';
+    const url = 'http://35.239.227.197:8080/api/form';
     let formData:FormData = new FormData();
+    // let headers: HttpHeaders = new HttpHeaders();
+    // headers = headers.append('Authorization','Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55');
 
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization': 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55'
+    //   })
+    // }
+
+
+    //const authToken = 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55';
+
+
+    var headers = new HttpHeaders();
+    headers.append("Authorization", 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55');
     formData.append('file', this.B64toBlob(smartScanForm.FormPages[0].imageData), 'file.name' + Math.random() + '.jpg');
 
+    //alert('in service'+ smartScanForm.FormPages[0].imageData);
     if (false && this.platform.is('cordova')) {
       return new Promise((resolve, reject) => {
-        this.http.sendRequest(url,{ method: "post", data: formData }).then(value => {
+        this.http.sendRequest(url,{ method: "post", data: formData, headers: { Authorization: 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55'},  timeout: 5000})
+        
+        .then(value => {
+          console.log('url'+ url);
+
+          console.log(value.data);
           resolve(this.extractValidationResult(value.data));
+          
         }).catch(error => {
           this.handleError(error);
 
@@ -34,7 +58,7 @@ export class ValidatorService {
       });
     } else {
       return new Promise((resolve, reject) => {
-        fetch(proxyUrl+url, {
+        fetch(url, {
             body: formData,
             method: 'POST'
         })
