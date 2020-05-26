@@ -16,7 +16,8 @@ import { ValidatorService } from './services/validator/validator.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { SettingsPage } from './settings/settings.page';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './services/token.interceptor';
 
 
 @NgModule({
@@ -35,6 +36,11 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     ValidatorService,
     HTTP,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

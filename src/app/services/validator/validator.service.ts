@@ -42,25 +42,34 @@ export class ValidatorService {
     //alert('in service'+ smartScanForm.FormPages[0].imageData);
     if (false && this.platform.is('cordova')) {
       return new Promise((resolve, reject) => {
-        this.http.sendRequest(url,{ method: "post", data: formData, headers: { Authorization: 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55'},  timeout: 5000})
+        // this.http.sendRequest(url,{ method: "post", data: formData, headers: { Authorization: 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55'},  timeout: 5000})
         
-        .then(value => {
-          console.log('url'+ url);
+        // .then(value => {
+        //   console.log('url'+ url);
 
-          console.log(value.data);
-          resolve(this.extractValidationResult(value.data));
+        //   console.log(value.data);
+        //   resolve(this.extractValidationResult(value.data));
           
-        }).catch(error => {
-          this.handleError(error);
+        // }).catch(error => {
+        //   this.handleError(error);
 
-          reject(error);
-        });
+        //   reject(error);
+        // });
+        this.httpService.post(url,formData)
+        .subscribe(value => {
+          console.log(value);
+          resolve(this.extractValidationResult(value));}
+          ,
+          err => 
+            console.log(err)
+        );
       });
     } else {
       return new Promise((resolve, reject) => {
         fetch(url, {
             body: formData,
-            method: 'POST'
+            method: 'POST',
+            headers: {'Authorization': 'Token 43b7f25f3438a121ac72f4e0888ba53df4da7a55'}
         })
         .then(response => {
             return response.json()
@@ -111,6 +120,7 @@ export class ValidatorService {
 
    extractValidationResult(data) {
     let validationResults: ValidationResultItem[] = new Array();
+    console.log('in dtaa'+JSON.stringify(data));
     const response = data.response[0].file_response;
     const keys = Object.keys(response);
 
