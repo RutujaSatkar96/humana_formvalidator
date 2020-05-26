@@ -120,8 +120,8 @@ export class ValidatorService {
 
    extractValidationResult(data) {
     let validationResults: ValidationResultItem[] = new Array();
-    console.log('in dtaa'+JSON.stringify(data));
-    const response = data.response[0].file_response;
+    //console.log('in dtaa'+JSON.stringify(data));
+    const response = data[0].response[0].file_response;
     const keys = Object.keys(response);
 
     (async () => {
