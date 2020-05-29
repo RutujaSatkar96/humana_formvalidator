@@ -261,6 +261,7 @@ filter(selected, level?){
     this.validationResults.splice(0);
 
     this.submitting = true;
+    //alert('in submit'+ JSON.stringify(input));
 
     this.validatorService.validateForm(input).then((data: ValidationResultItem[]) => {
       console.log(data);
